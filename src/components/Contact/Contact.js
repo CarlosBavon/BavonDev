@@ -86,14 +86,14 @@ const Contact = () => {
                             </select>
                         </div>
                         <div className="input-group contact__form-full">
-                            <textarea name="message" value={form.message} onChange={handleChange} className="input-field" placeholder="Tell me about your project..." rows={6} required />
+                            <textarea name="message" value={form.message} onChange={handleChange} className="input-field" placeholder="Tell me about your project... (Message must be at least 10 characters)" rows={6} required />
                         </div>
                     </div>
                     <button type="submit" className="btn btn-primary btn-large" disabled={loading}>
                         <FiSend /> {loading ? 'Sending...' : 'Send Message'}
                     </button>
                     {status === 'success' && <p className="contact__msg contact__msg--success">Message sent successfully! I'll get back to you soon.</p>}
-                    {status === 'error' && <p className="contact__msg contact__msg--error">Failed to send. Please email me directly at hello@bavdev.co.ke</p>}
+                    {status === 'error' && <p className="contact__msg contact__msg--error">Failed to send. Please email me directly at carlosbavon46@gmail.com</p>}
                 </motion.form>
             </div>
         </section>
