@@ -1,0 +1,28 @@
+.not-found {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--bg-primary);
+  padding-top: var(--nav-height);
+}
+
+.not-found__code {
+  font-family: var(--font-mono);
+  font-size: 5rem;
+  font-weight: 900;
+  color: var(--border-color);
+  display: block;
+  line-height: 1;
+}
+
+.not-found__title {
+  font-size: 2rem;
+  margin: var(--spacing-md) 0;
+}
+
+.not-found__desc {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+}

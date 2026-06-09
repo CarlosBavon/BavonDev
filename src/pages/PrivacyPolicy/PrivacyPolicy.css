@@ -1,0 +1,17 @@
+.privacy-policy {
+  padding-top: calc(var(--nav-height) + var(--spacing-xl));
+}
+
+.privacy-policy__content {
+  max-width: 800px;
+  margin-top: var(--spacing-lg);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.privacy-policy__content h2 {
+  font-size: 1.3rem;
+  margin: 2rem 0 0.8rem;
+  color: var(--text-primary);
+}
