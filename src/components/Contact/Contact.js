@@ -16,15 +16,22 @@ const Contact = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+        setStatus(null);
+
         try {
             await api.post('/api/contact', form);
-            setStatus('success');
+            setStatus({ type: 'success', msg: 'Message sent successfully! I’ll get back to you soon.' });
             setForm({ name: '', email: '', phone: '', service: '', budget: '', message: '' });
-        } catch {
-            setStatus('error');
+        } catch (error) {
+            const errMsg =
+                error.response?.data?.message ||
+                'Failed to send. Please email me directly at carlosbavon46@gmail.com';
+
+            setStatus({ type: 'error', msg: errMsg });
+        } finally {
+            setLoading(false);
+            setTimeout(() => setStatus(null), 6000);
         }
-        setLoading(false);
-        setTimeout(() => setStatus(null), 5000);
     };
 
     return (
@@ -92,8 +99,14 @@ const Contact = () => {
                     <button type="submit" className="btn btn-primary btn-large" disabled={loading}>
                         <FiSend /> {loading ? 'Sending...' : 'Send Message'}
                     </button>
-                    {status === 'success' && <p className="contact__msg contact__msg--success">Message sent successfully! I'll get back to you soon.</p>}
-                    {status === 'error' && <p className="contact__msg contact__msg--error">Failed to send. Please email me directly at carlosbavon46@gmail.com</p>}
+                    {status && (
+                        <p
+                            className={`contact__msg ${status.type === 'success' ? 'contact__msg--success' : 'contact__msg--error'
+                                }`}
+                        >
+                            {status.msg}
+                        </p>
+                    )}
                 </motion.form>
             </div>
         </section>

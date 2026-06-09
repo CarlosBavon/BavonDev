@@ -14,13 +14,17 @@ const BookingModal = ({ isOpen, onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+        setStatus(null);
+
         try {
             await api.post('/api/bookings', form);
-            setStatus('success');
-            setForm({ name: '', email: '', phone: '', service: '', message: '' });
-            setTimeout(() => { setStatus(null); onClose(); }, 2000);
-        } catch {
-            setStatus('error');
+            setStatus({ type: 'success', msg: 'Booking request sent! We will confirm shortly.' });
+            // reset form...
+        } catch (error) {
+            const errMsg =
+                error.response?.data?.message ||
+                'Something went wrong. Please try again.';
+            setStatus({ type: 'error', msg: errMsg });
         }
         setLoading(false);
     };
@@ -77,8 +81,14 @@ const BookingModal = ({ isOpen, onClose }) => {
                             <button type="submit" className="btn btn-primary btn-large" style={{ width: '100%' }} disabled={loading}>
                                 {loading ? 'Sending...' : 'Submit Booking Request'}
                             </button>
-                            {status === 'success' && <p className="modal__msg modal__msg--success">Booking request sent! We will confirm shortly.</p>}
-                            {status === 'error' && <p className="modal__msg modal__msg--error">Something went wrong. Please try again.</p>}
+                            {status && (
+                                <p
+                                    className={`contact__msg ${status.type === 'success' ? 'contact__msg--success' : 'contact__msg--error'
+                                        }`}
+                                >
+                                    {status.msg}
+                                </p>
+                            )}
                         </form>
                     </motion.div>
                 </motion.div>
