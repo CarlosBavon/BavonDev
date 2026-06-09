@@ -77,11 +77,11 @@ const Contact = () => {
                         <div className="input-group">
                             <select name="budget" value={form.budget} onChange={handleChange} className="input-field">
                                 <option value="">Select Budget Range</option>
-                                <option>Under $1,000</option>
-                                <option>$1,000 - $5,000</option>
-                                <option>$5,000 - $10,000</option>
-                                <option>$10,000 - $25,000</option>
-                                <option>$25,000+</option>
+                                <option>Under Ksh.30,000</option>
+                                <option>Ksh.30,000 - Ksh.50,000</option>
+                                <option>Ksh.50,000 - Ksh.100,000</option>
+                                <option>Ksh.100,000 - Ksh.200,000</option>
+                                <option>Ksh.200,000+</option>
                                 <option>Not Sure</option>
                             </select>
                         </div>
