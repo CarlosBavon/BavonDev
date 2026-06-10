@@ -28,6 +28,14 @@ const Hero = () => {
 
     const titleWords = ['Building', 'Digital', 'Products'];
 
+    const handleHeroClick = (e, href) => {
+        if (href.startsWith('#')) {
+            e.preventDefault();
+            const el = document.querySelector(href);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <section className="hero" id="home">
             <div className="hero__bg">
@@ -92,7 +100,7 @@ const Hero = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 1.3 }}
                     >
-                        <a href="#projects" className="btn btn-primary btn-large magnetic-wrap">
+                        <a href="#projects" className="btn btn-primary btn-large magnetic-wrap" onClick={(e) => handleHeroClick(e, '#projects')}>
                             <span>View Projects</span>
                             <FiArrowRight />
                         </a>
