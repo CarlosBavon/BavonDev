@@ -17,7 +17,7 @@ const allProjects = [
         tech: ['React', 'Node.js', 'MongoDB', 'Express'],
         imageUrl: porkyImg,
         liveUrl: 'https://porky-delights.vercel.app',
-        githubUrl: 'https://github.com/CarlosBavon/porky-delights',
+        githubUrl: 'https://github.com/CarlosBavon/PorkyDelights',
     },
     {
         id: 2,
@@ -28,7 +28,7 @@ const allProjects = [
         tech: ['React', 'Framer Motion', 'Node.js', 'MongoDB'],
         imageUrl: bavImg,
         liveUrl: 'https://bavdev.vercel.app/',
-        githubUrl: 'https://github.com/CarlosBavon/porky-delights',
+        githubUrl: 'https://github.com/CarlosBavon/BavDev',
     },
     {
         id: 3,
@@ -39,7 +39,7 @@ const allProjects = [
         tech: ['React', 'Framer Motion', 'Node.js', 'MongoDB'],
         imageUrl: hairImg,
         liveUrl: 'https://stylebymk.vercel.app/',
-        githubUrl: 'https://github.com/CarlosBavon/porky-delights',
+        githubUrl: 'https://github.com/CarlosBavon/Stylebymk-Front',
     },
 ];
 
