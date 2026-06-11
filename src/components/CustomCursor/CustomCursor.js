@@ -10,6 +10,8 @@ const CustomCursor = () => {
         const isMobile = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
         if (isMobile) return;
 
+        document.body.classList.add('custom-cursor-active');
+
         const onMouseMove = (e) => {
             setPos({ x: e.clientX, y: e.clientY });
             if (!isVisible) setIsVisible(true);
@@ -32,11 +34,7 @@ const CustomCursor = () => {
         document.addEventListener('mouseout', handleHoverEnd);
 
         return () => {
-            document.removeEventListener('mousemove', onMouseMove);
-            document.removeEventListener('mouseleave', onMouseLeave);
-            document.removeEventListener('mouseenter', onMouseEnter);
-            document.removeEventListener('mouseover', handleHoverStart);
-            document.removeEventListener('mouseout', handleHoverEnd);
+            document.body.classList.remove('custom-cursor-active');
         };
     }, [isVisible]);
 
