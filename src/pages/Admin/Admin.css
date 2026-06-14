@@ -16,6 +16,16 @@
   border: 1px solid var(--border-color);
 }
 
+.admin-upload-section {
+  margin-bottom: var(--spacing-md);
+}
+.admin-label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+  color: var(--text-secondary);
+}
+
 .admin-login__title {
   font-size: 1.5rem;
   font-weight: 700;

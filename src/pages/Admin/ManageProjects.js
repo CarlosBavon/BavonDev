@@ -5,33 +5,73 @@ import './Admin.css';
 const ManageProjects = () => {
     const [projects, setProjects] = useState([]);
     const [form, setForm] = useState({
-        title: '', category: 'React', description: '', features: '', technologies: '', liveUrl: '', githubUrl: ''
+        title: '', category: 'React', description: '', features: '',
+        technologies: '', liveUrl: '', githubUrl: '', imageUrl: ''
     });
     const [editingId, setEditingId] = useState(null);
+    const [uploading, setUploading] = useState(false);
+    const [imagePreview, setImagePreview] = useState(null);
 
+    // Fetch projects
     const fetchProjects = () => {
-        api.get('/api/projects').then(res => setProjects(res.data.data));
+        api.get('/api/projects?all=true').then(res => setProjects(res.data.data));
     };
-
     useEffect(() => { fetchProjects(); }, []);
 
+    // Handle file selection
+    const handleFileChange = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // Show preview
+        const reader = new FileReader();
+        reader.onload = () => setImagePreview(reader.result);
+        reader.readAsDataURL(file);
+
+        // Upload to server
+        setUploading(true);
+        const formData = new FormData();
+        formData.append('image', file);
+
+        try {
+            const res = await api.post('/api/upload', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            });
+            // Save the image URL returned
+            setForm({ ...form, imageUrl: res.data.data.imageUrl });
+            setUploading(false);
+        } catch (err) {
+            console.error('Upload failed:', err);
+            setUploading(false);
+            alert('Image upload failed. Make sure it is an image and under 5MB.');
+        }
+    };
+
+    // Submit form
     const handleSubmit = async (e) => {
         e.preventDefault();
         const payload = {
             ...form,
-            features: form.features.split(',').map(f => f.trim()),
-            technologies: form.technologies.split(',').map(t => t.trim()),
+            features: form.features.split(',').map(f => f.trim()).filter(Boolean),
+            technologies: form.technologies.split(',').map(t => t.trim()).filter(Boolean),
         };
-        if (editingId) {
-            await api.put(`/api/projects/${editingId}`, payload);
-        } else {
-            await api.post('/api/projects', payload);
+
+        try {
+            if (editingId) {
+                await api.put(`/api/projects/${editingId}`, payload);
+            } else {
+                await api.post('/api/projects', payload);
+            }
+            setEditingId(null);
+            setForm({ title: '', category: 'React', description: '', features: '', technologies: '', liveUrl: '', githubUrl: '', imageUrl: '' });
+            setImagePreview(null);
+            fetchProjects();
+        } catch (err) {
+            console.error('Save failed:', err);
         }
-        setEditingId(null);
-        setForm({ title: '', category: 'React', description: '', features: '', technologies: '', liveUrl: '', githubUrl: '' });
-        fetchProjects();
     };
 
+    // Edit handler
     const handleEdit = (project) => {
         setEditingId(project._id);
         setForm({
@@ -42,14 +82,9 @@ const ManageProjects = () => {
             technologies: project.technologies.join(', '),
             liveUrl: project.liveUrl || '',
             githubUrl: project.githubUrl || '',
+            imageUrl: project.imageUrl || '',
         });
-    };
-
-    const handleDelete = async (id) => {
-        if (window.confirm('Delete project?')) {
-            await api.delete(`/api/projects/${id}`);
-            fetchProjects();
-        }
+        setImagePreview(project.imageUrl || null);
     };
 
     return (
@@ -65,8 +100,20 @@ const ManageProjects = () => {
                 <input className="input-field" placeholder="Technologies (comma separated)" value={form.technologies} onChange={e => setForm({ ...form, technologies: e.target.value })} />
                 <input className="input-field" placeholder="Live URL" value={form.liveUrl} onChange={e => setForm({ ...form, liveUrl: e.target.value })} />
                 <input className="input-field" placeholder="GitHub URL" value={form.githubUrl} onChange={e => setForm({ ...form, githubUrl: e.target.value })} />
+
+                {/* Image Upload Section */}
+                <div className="admin-upload-section">
+                    <label className="admin-label">Project Image</label>
+                    {imagePreview && (
+                        <img src={imagePreview} alt="Preview" style={{ width: '200px', marginBottom: '10px', display: 'block' }} />
+                    )}
+                    <input type="file" onChange={handleFileChange} accept="image/*" />
+                    {uploading && <p>Uploading...</p>}
+                    <input className="input-field" placeholder="Or paste image URL manually" value={form.imageUrl} onChange={e => setForm({ ...form, imageUrl: e.target.value })} />
+                </div>
+
                 <button type="submit" className="btn btn-primary">{editingId ? 'Update' : 'Create'}</button>
-                {editingId && <button type="button" className="btn btn-outline" onClick={() => { setEditingId(null); setForm({ title: '', category: 'React', description: '', features: '', technologies: '', liveUrl: '', githubUrl: '' }); }}>Cancel</button>}
+                {editingId && <button type="button" className="btn btn-outline" onClick={() => { setEditingId(null); setForm({ title: '', category: 'React', description: '', features: '', technologies: '', liveUrl: '', githubUrl: '', imageUrl: '' }); setImagePreview(null); }}>Cancel</button>}
             </form>
 
             <h2 className="admin-section-title mt-2">All Projects</h2>
