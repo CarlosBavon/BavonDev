@@ -6,6 +6,7 @@ import './Projects.css';
 import porkyImg from '../../assets/images/pork.png';
 import bavImg from '../../assets/images/bav.png'
 import hairImg from '../../assets/images/hair.png'
+import api from '../../utils/api';
 
 const allProjects = [
     {
@@ -93,13 +94,17 @@ const Projects = () => {
                             <div className="project-card__visual">
                                 {project.imageUrl ? (
                                     <img
-                                        src={project.imageUrl}
+                                        src={
+                                            project.imageUrl.startsWith('http')
+                                                ? project.imageUrl
+                                                : `${api.defaults.baseURL}${project.imageUrl}`
+                                        }
                                         alt={project.title}
                                         className="project-card__image"
                                     />
                                 ) : (
                                     <div className="project-card__placeholder">
-                                        <span>{project.title}</span>
+                                        <span className="project-card__placeholder-text">{project.title}</span>
                                     </div>
                                 )}
                             </div>
