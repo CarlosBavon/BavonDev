@@ -38,7 +38,7 @@ const allProjects = [
         features: ['Calendar Integration', 'Real-time Booking', 'Push Notifications', 'Rating Feature'],
         tech: ['React', 'Framer Motion', 'Node.js', 'MongoDB'],
         imageUrl: hairImg,
-        liveUrl: 'https://stylebymk.vercel.app/',
+        liveUrl: 'https://stylesbymk.hair/',
         githubUrl: 'https://github.com/CarlosBavon/Stylebymk-Front',
     },
 ];
