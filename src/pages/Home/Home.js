@@ -18,21 +18,34 @@ const Home = () => {
                 <title>BavDev | Full Stack Developer & UI/UX Designer</title>
                 <meta name="description" content="BavDev — Full Stack Software Developer & UI/UX Designer based in Kenya. Building digital products that people love to use. React, Node.js, React Native expert." />
                 <meta name="keywords" content="full stack developer, react developer, node.js developer, UI/UX designer, Kenya developer, mobile app developer, SaaS developer" />
+
+                {/* Open Graph – essential for social sharing */}
                 <meta property="og:title" content="BavDev | Full Stack Developer & UI/UX Designer" />
                 <meta property="og:description" content="Building digital products that people love to use. Based in Kenya." />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://bavdev.xyz" />
+                <meta property="og:image" content="https://bavdev.xyz/images/share-image.png" />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta property="og:image:type" content="image/jpeg" />
+
+                {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content="BavDev | Full Stack Developer" />
                 <meta name="twitter:description" content="Building digital products that people love to use." />
+                <meta name="twitter:image" content="https://bavdev.xyz/images/share-image.png" />
+                <meta name="twitter:image:alt" content="BavDev Full Stack Developer" />
+
                 <link rel="canonical" href="https://bavdev.xyz" />
+
+                {/* Structured data – ensure URL matches current domain */}
                 <script type="application/ld+json">
                     {JSON.stringify({
                         '@context': 'https://schema.org',
                         '@type': 'Person',
                         name: 'BavDev',
                         jobTitle: 'Full Stack Developer & UI/UX Designer',
-                        url: 'https://bavdev.co.ke',
+                        url: 'https://bavdev.xyz',
                         knowsAbout: ['React', 'Node.js', 'MongoDB', 'React Native', 'UI/UX Design'],
                         address: { '@type': 'PostalAddress', addressCountry: 'KE' },
                     })}
