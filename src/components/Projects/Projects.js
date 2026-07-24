@@ -4,8 +4,9 @@ import { useInView } from 'react-intersection-observer';
 import { FiExternalLink, FiGithub } from 'react-icons/fi';
 import './Projects.css';
 import porkyImg from '../../assets/images/pork.png';
-import bavImg from '../../assets/images/bav.png'
-import hairImg from '../../assets/images/hair.png'
+import bavImg from '../../assets/images/bav.png';
+import hairImg from '../../assets/images/hair.png';
+import bavibleImg from '../../assets/images/bavible.png';
 
 const allProjects = [
     {
@@ -32,7 +33,7 @@ const allProjects = [
     },
     {
         id: 3,
-        title: 'Hair Stylist',
+        title: 'StylesbyMK',
         category: 'Full Stack',
         description: 'Premium hair studio where you experience the art of hair design.',
         features: ['Calendar Integration', 'Real-time Booking', 'Push Notifications', 'Rating Feature'],
@@ -40,6 +41,17 @@ const allProjects = [
         imageUrl: hairImg,
         liveUrl: 'https://stylesbymk.hair/',
         githubUrl: 'https://github.com/CarlosBavon/Stylebymk-Front',
+    },
+    {
+        id: 4,
+        title: 'BAVIBLE',
+        category: 'React',
+        description: 'A Complete Scriptural Library-Every book. Every tradition. No omissions.',
+        features: ['The 66 book canon', 'the Deuterocanon', 'the Pseudepigrapha'],
+        tech: ['React', 'Node.js'],
+        imageUrl: bavibleImg,
+        liveUrl: 'https://bavible.vercel.app/',
+        githubUrl: 'https://github.com/CarlosBavon/BAVIBLE',
     },
 ];
 
