@@ -50,7 +50,7 @@ const allProjects = [
         features: ['The 66 book canon', 'the Deuterocanon', 'the Pseudepigrapha'],
         tech: ['React', 'Node.js'],
         imageUrl: bavibleImg,
-        liveUrl: 'https://bavible.vercel.app/',
+        liveUrl: 'https://bavible-zeta.vercel.app/',
         githubUrl: 'https://github.com/CarlosBavon/BAVIBLE',
     },
 ];
