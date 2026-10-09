@@ -2,9 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/react';
 import Navbar from './components/Navbar/Navbar';
-import CustomCursor from './components/CustomCursor/CustomCursor';
 import ScrollProgress from './components/ScrollProgress/ScrollProgress';
 import Footer from './components/Footer/Footer';
 import './App.css';
@@ -32,7 +30,6 @@ function App() {
 
   return (
     <>
-      <CustomCursor />
       <ScrollProgress />
       {!isAdmin && <Navbar />}
       <main className="main-content">
@@ -50,7 +47,6 @@ function App() {
       </main>
       {!isAdmin && <Footer />}
       <Analytics />
-      <SpeedInsights />
     </>
   );
 }
